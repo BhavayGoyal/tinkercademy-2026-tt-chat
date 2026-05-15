@@ -6,10 +6,13 @@
 #include <sys/types.h>
 #include <unistd.h>
 
-int main() {
+int main(int argc, char* argv[]) {
   // #Question - are these the same type?
   // Answer - No, the first one is a C++ string object, while the second one is a C-style string (character array). Their is an implicit conversion hapenning here because of which we are able to do this conversion.
   std::string message = "Hello from client";
+  if (argc > 1) {
+    message = argv[1];
+  }
   const int kPort = 8080;
   const std::string kServerAddress = "127.0.0.1";
   sockaddr_in address;

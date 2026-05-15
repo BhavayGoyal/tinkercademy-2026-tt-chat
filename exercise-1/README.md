@@ -44,7 +44,7 @@ Before you scroll down to the questions, try this:
      you didn't even realise you should have learned. What were yours, and how
      could a better learning plan have surfaced them earlier?
 
-       - Wasted time in thinking about project
+       - Wasted time in thinking about project, I don't really feel I've read even close to suffice
 
 The point of this exercise isn't to get the questions "right" — it's to notice
 the gap between how you *think* you learn and how you actually do, so you can
@@ -114,10 +114,10 @@ close it.
 ## Introduction to Sockets
 
 - Read the code in `src/tcp-echo-client.cc` and add a way to change the 
-  message sent using command line arguments
+  message sent using command line arguments - Done
 - **Example**: `./client "hello message from the command prompt"` should send
-  `"hello message from the command prompt"` to the server
-- Commit your changes into git
+  `"hello message from the command prompt"` to the server - Done
+- Commit your changes into git - Done
 - What do all these headers do?
 - How do you find out which part of the below code comes from which header?
 - How do you change the code so that you are sending messages to servers
@@ -125,7 +125,7 @@ close it.
 - How do you change the code to send to a IPv6 address instead of IPv4?
 - **Bonus**: How do you change the client code to connect by hostname instead
   of IP address?
-  
+
 ## Introduction to Memory Management
 
 - What is happening in line 26 of `tcp-echo-client.cc`? 
