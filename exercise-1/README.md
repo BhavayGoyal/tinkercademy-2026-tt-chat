@@ -44,7 +44,7 @@ Before you scroll down to the questions, try this:
      you didn't even realise you should have learned. What were yours, and how
      could a better learning plan have surfaced them earlier?
 
-       - Wasted time in thinking about project, I don't really feel I've read even close to suffice
+       - Wasted time in thinking about project, Even used AI to understand concepts and learn concepts, I don't really feel I've read even close to suffice (TODO)
 
 The point of this exercise isn't to get the questions "right" — it's to notice
 the gap between how you *think* you learn and how you actually do, so you can
@@ -55,8 +55,16 @@ close it.
 - Answer the following questions in this file and commit and push your changes.
 - Bonus sections are more difficult and optional.
 - How can you find the information required to complete these tasks?
+  - The most reilable way is to consult the official documentation, and read tutorials or technical books (For ex. Beej's guide on networking etc.)
 - How can you tell if the source of your information is good?
+  - It's highly regarded in the community (Having high citations might be helpful)
+  - Maintained properly by the creators
+  - It's up-to-date and provides a good context
 - How would you define "good" in this situation?
+  - Given that I do not have a lot of time and need to study multiple topics, a “good” source is one that is:
+    - Accurate, clear, updated and trusted by experienced developers
+    - Focused on practial understanding instead of unnecessary theory
+    - Efficient to learn from
 
 ## Learn Basics of g++ CLI
 
@@ -79,7 +87,7 @@ close it.
 - What other kinds of build types are useful?
   - -Os is a build type which optimizes it for size. I don't remember any other build types
 
-## Learn Basics of Make
+## Learn Basics of Make (TODO)
 
 - Create a Makefile that will speed up the process.
 - [Quickstart tutorial to make](https://makefiletutorial.com/) - Learn make 
@@ -111,7 +119,7 @@ close it.
 - What are the most important commands to know in git?
   - clone, add, commit, push, pull, status, log, diff, branch
 
-## Introduction to Sockets
+## Introduction to Sockets (TODO)
 
 - Read the code in `src/tcp-echo-client.cc` and add a way to change the 
   message sent using command line arguments - Done
@@ -127,32 +135,56 @@ close it.
   of IP address?
 
 ## Introduction to Memory Management
-
+(TODO)
 - What is happening in line 26 of `tcp-echo-client.cc`? 
   `if (inet_pton(AF_INET, kServerAddress.c_str(), &address.sin_addr) <= 0) {`
 - What is happening in line 31 of `tcp-echo-client.cc`?
   `if (connect(my_sock, (sockaddr *)&address, sizeof(address)) < 0) {`
 - What is the difference between a pointer and a reference?
+  - A pointer is a variable that holds memory address. 
+    - It can be Null
+    - It can be reassigned to point to some other variable
+    - Required referencing using * or ->
+  - A reference is an alias to an existing variable. 
+    - It can't be Null, must be initialized upon creation
+    - Can't be used to refer to some other variable
+    - Does not need any referencing, can be used like a normal variable
 - When is it better to use a pointer?
+  - When you need to dynamically allocate memory on the heap or when the value can be NULL
 - When is it better to use a reference?
+  - When passing parameters to functions to avoid copying large objects and you know that object exists (because it can't be NULL)
 - What is the difference between `std::string` and a C-style string?
+  - std::string is a C++ class that manages memory automatically along with lots of useful string functions.
+  - A C-style string is a char* or const char* array of characters ending with '\0'.
 - What type is a C-style string?
+  - It is represented as a char* or const char* pointing to the first character of the array.
 - What happens when you iterate a pointer?
+  - Pointer airthmetic occurs. If we add 1 to the pointer, the memory address it holds increase by the size of data type it holds. Like it it's holding an integer (4 bytes) doing ptr++ will increase the memory address by 4 bytes.
 - What are the most important safety tips to know when using pointers?
+  - Be extremely careful with dangling pointers
+  - Always initialize the ptrs, and always delete it when allocated on heap
+  - never double delete a ptr on heap
+  - Check if ptr is nullptr before dereferencing it
 
 ## Learn Basics of Creating a C++ Project in Your IDE
 
 - How do you compile and run your project in your IDE?
+  - So when I do competitive programming in sublime I've a build file which does the work and I compile it using shift+f10 (custom command)
+  - In VS code if it's single file using g++ commands and if their are multiple files then by creating a make file (So far I used to use AI tools to make the make file, but now as I'm learning about make I'll also understand what and how make file is doing and will write them myself)
 
 ## Improving Interactions with LLMs
 
-- What is the most authoritative source of information about `socket()`
-  from `<sys/socket.h>`?
-- What is the most authoritative source of information about the TCP and IP
-  protocols?
-- What is the most authoritative source of information about the C++
-  programming language?
-- What information can you find about using Markdown when structuring prompts 
-  to LLMs?
+- What is the most authoritative source of information about `socket()` from `<sys/socket.h>`?
+  - POSIX / Single UNIX Specification and the man pages
+- What is the most authoritative source of information about the TCP and IP protocols?
+  - Requests for Comments (RFC) documents by Internet Engineering Task Force (IETF)
+- What is the most authoritative source of information about the C++ programming language?
+  - ISO/IEC C++ Standard document
+  - cppreference.com (considered day-to-day gold reference)
+- What information can you find about using Markdown when structuring prompts  to LLMs?
+  - Structuring prompts with markdown helps us in getting better responses as the LLM is able to parse our intent much more accurately. That is mainly because LLMs are heavily trained on webdata which uses markdowns.
 - What is the difference between LLM and AI?
+  - AI is a broad computer science field dedicated to creating systems which is capable of performing tasks that typically require human intelligence.
+  - LLM is a type/subset of AI - which is a Neural Network trained on massive amount of text data specifically designed to understand, process and generate human languages. 
 - Is it grammatically correct in English to say "a LLM" or "an LLM"? Why?
+  - an LLM (-el sound), because it's decided by the sound and not the first alphabet.

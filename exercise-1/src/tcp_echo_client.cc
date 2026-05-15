@@ -8,16 +8,13 @@
 
 int main(int argc, char* argv[]) {
   // #Question - are these the same type?
-  // Answer - No, the first one is a C++ string object, while the second one is a C-style string (character array). Their is an implicit conversion hapenning here because of which we are able to do this conversion.
-  std::string message = "Hello from client";
-  if (argc > 1) {
-    message = argv[1];
-  }
-  const int kPort = 8080;
-  const std::string kServerAddress = "127.0.0.1";
+  std::string message = "Hello from client"; // Answer - No, the first one is a C++ string object, while the second one is a C-style string (character array). Their is an implicit conversion hapenning here because of which we are able to do this conversion.
+  if (argc > 1) message = argv[1];
+  const int kPort = 8080; // Answer - Yes, both are of integer type.
+  const std::string kServerAddress = "127.0.0.1"; // Answer - No, the first one is a C++ string object, while the second one is a C-style string (character array). Their is an implicit conversion hapenning here because of which we are able to do this conversion.
   sockaddr_in address;
-  const int kBufferSize = 1024;
-  char buffer[kBufferSize] = {0};
+  const int kBufferSize = 1024; // Answer - Yes, both are of integer type.
+  char buffer[kBufferSize] = {0}; // Answer - No, they are not the same type. In fact, one of them isn't even a "type" at all (it's an initializer list used to initialize all elements to zero).
   // Creating socket file descriptor
   int my_sock = socket(AF_INET, SOCK_STREAM, 0);
   if (my_sock < 0) {
