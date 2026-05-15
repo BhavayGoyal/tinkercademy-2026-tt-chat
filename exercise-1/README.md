@@ -1,6 +1,6 @@
 # Exercise 1
 
-**Update this README with your answers to the questions below.**
+**Solved**
 
 ## How to Approach This Exercise
 
@@ -19,8 +19,8 @@ Before you scroll down to the questions, try this:
      why it exists, and how it is used in industry. My goal here is context
      before depth. I may use AI tools like Claude or Gemini to quickly map the
      landscape.
-   - **Phase 2: Primary-source deep dive.** I will study authoritative
-     references and focus first on what I do not know. I will start with `g++`
+   - **Phase 2: Primary-source deep dive.** I will study references/textbooks 
+     and focus first on what I do not know. I will start with `g++`
      CLI and `make` (man pages + practical docs), then move to sockets in C++
      (e.g., Beej's Guide + man pages). Since I already know some Git and
      memory-management basics, I will cover those later.
@@ -44,7 +44,7 @@ Before you scroll down to the questions, try this:
      you didn't even realise you should have learned. What were yours, and how
      could a better learning plan have surfaced them earlier?
 
-       - Wasted time in thinking about project, Even used AI to understand concepts and learn concepts, I don't really feel I've read even close to suffice (TODO)
+       - Wasted time in thinking about project, Even used AI to understand concepts and learn concepts, I don't really feel I've read even close to suffice (TODO), known-unknown(other kinds of builds that are useful)
 
 The point of this exercise isn't to get the questions "right" — it's to notice
 the gap between how you *think* you learn and how you actually do, so you can
@@ -117,29 +117,38 @@ close it.
   everything is working?
   - Lots of small commits are still better because even if everything seems to work in a big commit you might have missed some small mistakes which becomes hard to be reverted. 
 - What are the most important commands to know in git?
-  - clone, add, commit, push, pull, status, log, diff, branch
+  - clone, add, commit, push, pull, status, log, diff, branch, tag
 
-## Introduction to Sockets (TODO)
+## Introduction to Sockets
 
-- Read the code in `src/tcp-echo-client.cc` and add a way to change the 
-  message sent using command line arguments - Done
-- **Example**: `./client "hello message from the command prompt"` should send
-  `"hello message from the command prompt"` to the server - Done
+- Read the code in `src/tcp-echo-client.cc` and add a way to change the message sent using command line arguments - Done
+- **Example**: `./client "hello message from the command prompt"` should send `"hello message from the command prompt"` to the server - Done
 - Commit your changes into git - Done
 - What do all these headers do?
+  - arpa/inet.h: address conversion related functions like inet_pton, inet_ntop
+  - iostream: stdio related stuff, like cin, cout etc.
+  - netinet/in.h: provides protocol related structs and constants
+  - string: offers std::string (which we already discussed in other sections)
+  - sys/socket.h: provides the core socket functionality like socket, connect, bind etc.
+  - sys/types.h: defines types which are related to systems
+  - unistd.h: read, close and other posix os apis
 - How do you find out which part of the below code comes from which header?
-- How do you change the code so that you are sending messages to servers
-  other than localhost?
+  - use man pages, like doing man connect will tell that it requires sys/socket.h
+- How do you change the code so that you are sending messages to servers other than localhost?
+  - just change kServerAddress from "127.0.0.1" to the required target server's ip address (which can be taken as input or sys args)
 - How do you change the code to send to a IPv6 address instead of IPv4?
-- **Bonus**: How do you change the client code to connect by hostname instead
-  of IP address?
+  - Change AF_INET to AF_INET6, struct sockaddr_in to struct sockaddr_in6, sin_addr to sin6_addr, sin_port to sin6_port
+- **Bonus**: How do you change the client code to connect by hostname instead of IP address?
+  - we can use getaddrinfo() function which resolves the DNS and returns a linkedlist of addrinfo structs 
+  which we can iterate through and pass to connect()
 
 ## Introduction to Memory Management
-(TODO)
 - What is happening in line 26 of `tcp-echo-client.cc`? 
   `if (inet_pton(AF_INET, kServerAddress.c_str(), &address.sin_addr) <= 0) {`
+  - inet_pton is 'internet presentation to networking' which converts an IP address in numbers and dots notation into either a struct in_addr or a struct in6_addr so the socket API can use it.
 - What is happening in line 31 of `tcp-echo-client.cc`?
   `if (connect(my_sock, (sockaddr *)&address, sizeof(address)) < 0) {`
+  - This line attempts to connect the client socket (my_sock) and the server specified by the address by establishing a TCP connection. 
 - What is the difference between a pointer and a reference?
   - A pointer is a variable that holds memory address. 
     - It can be Null
