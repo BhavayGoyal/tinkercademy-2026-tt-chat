@@ -49,7 +49,13 @@
 
 - Read the code in `src/`
 - Are there any bugs in this code? 
+  - Yes.
+    - sockaddr_in address; is not being initialized to zero which can leave garbage values in memory.
+    - send() return values is unchecked and we should deal with it. TCP can also do partial sends so we should loop untill all bytes are sent or use send_all()
+    - read() is called once only which assumes that it'll read full message which is incorrect as TCP can send partially. To fix this we should either loop until full message is recieved or use read_all()
+    - ...
 - What can you do to identify if there are bugs in the code?
+  - use debugging tools like gdb, run with -fsanitize=address, undefined. Read compiler warning carefully and use -Wall, -Wextra to get proper compiler warnings. When unsure about the function arguments etc, make sure to refer to man guides or some resource to verify otherwise you can very easily make bugs. Also check if all the return values of calls like socket(), send(), recv() etc. are handled/dealt.
 
 ## Refactoring: Extract Function
 
@@ -60,7 +66,7 @@
 - What are the tradeoffs compared to exercise-1?
   - Higher line count and the microscopic overhead of function calls. However, modern compilers will likely inline these functions anyway, negating the overhead.
 - Are you able to spot any mistakes or inconsistencies in the changes?
-  - (TODO)
+  - ...
   
 ## Thinking About Performance
 
@@ -80,8 +86,10 @@
 - Make sure to commit each change as small and self-contained commit
 - This will make it easier to revert your code if you need to
 - What is `git tag`? How is `git tag` different from `git branch`?
-- How can you use `git tag` and `git branch` to make programming easier and
-  more fun?
+  - git tag marks a specific commit with a special permanent label (eg. v1.0). It is usually used to mark important commits where everything was working or to mark specific versions. It does not move.
+  - git branch creates a new pointer which can be moved forward by commits independently of the main branch pointer. this new branch can be later merged with the main branch. This is used to impliment different features independently which can be later merged into one project.
+- How can you use `git tag` and `git branch` to make programming easier and more fun?
+  - tags are useful for stable milestones so we can always go back and compare our current version with the previous version. branches are useful when we want to work on different features parallely which are different from the main branch.
 
 ## Learn Basics of Debugging in Your IDE
 
