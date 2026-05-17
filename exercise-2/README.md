@@ -45,15 +45,17 @@
 - What about HTTPS? Is there a spec for that protocol?
   - HTTPS doesn't have a standalone protocol spec. It is simply HTTP running over a secure TLS (Transport Layer Security) connection.
 
-## Introduction to C++ and Sockets Programming (TODO)
+## Introduction to C++ and Sockets Programming
 
 - Read the code in `src/`
 - Are there any bugs in this code? 
   - Yes.
+    - in server, we are doing SO_REUSEADDR | SO_REUSEPORT in setsockopt which is wrong. Doing an OR, results in an invalid option value. we should call setsockopt twice once with each arg
     - sockaddr_in address; is not being initialized to zero which can leave garbage values in memory.
-    - send() return values is unchecked and we should deal with it. TCP can also do partial sends so we should loop untill all bytes are sent or use send_all()
-    - read() is called once only which assumes that it'll read full message which is incorrect as TCP can send partially. To fix this we should either loop until full message is recieved or use read_all()
-    - ...
+    - send() return values is unchecked and we should deal with it. TCP can also do partial sends so we should loop untill all bytes are sent
+    - read() is called once only which assumes that it'll read full message which is incorrect as TCP can send partially. To fix this we should either loop until full message is recieved
+    - in read_args, we shouldn't kill the program if argc == 1 as that's a bit too aggressive.
+    - close(my_socket) will never be called as handle_connections is running an infitite loop. 
 - What can you do to identify if there are bugs in the code?
   - use debugging tools like gdb, run with -fsanitize=address, undefined. Read compiler warning carefully and use -Wall, -Wextra to get proper compiler warnings. When unsure about the function arguments etc, make sure to refer to man guides or some resource to verify otherwise you can very easily make bugs. Also check if all the return values of calls like socket(), send(), recv() etc. are handled/dealt.
 
@@ -66,7 +68,8 @@
 - What are the tradeoffs compared to exercise-1?
   - Higher line count and the microscopic overhead of function calls. However, modern compilers will likely inline these functions anyway, negating the overhead.
 - Are you able to spot any mistakes or inconsistencies in the changes?
-  - ...
+  - Hardcoding exit(EXIT_FAILURE) inside utility functions makes them non-reusable in a real application
+  - And other mistakes/bugs already discussed above in (Are there any bugs in this code?) in Introduction to C++ and Sockets Programming section
   
 ## Thinking About Performance
 
@@ -75,9 +78,9 @@
 - What do we mean when we say performance?
   - Performance typically refers to latency, how many requests can be handled per second, CPU utilization, and memory used.
 - How do we measure performance in a program?
-  - Through profiling tools life perf or using benchmarking frameworks (like Google Benchmark), or testing the network program under load using tools like Apache Bench (ab).
+  - Through profiling tools like perf or using benchmarking frameworks (like Google Benchmark), or testing the network program under load using tools like Apache Bench (ab).
 
-## Play with Git (TODO)
+## Play with Git
 
 - There isn't necessarily a single correct answer for how to abstract the 
   code from exercise-1 into functions
