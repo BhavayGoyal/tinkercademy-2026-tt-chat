@@ -87,23 +87,43 @@ close it.
 - What other kinds of build types are useful?
   - -Os is a build type which optimizes it for size. I don't remember any other build types
 
-## Learn Basics of Make (TODO)
+## Learn Basics of Make
 
 - Create a Makefile that will speed up the process.
-- [Quickstart tutorial to make](https://makefiletutorial.com/) - Learn make 
-  fundamentals with practical examples and common patterns.
+- [Quickstart tutorial to make](https://makefiletutorial.com/) - Learn make fundamentals with practical examples and common patterns.
 - How else can you learn about make?
+  - man make/info make or searching the web for tutorials is a good way to start with, besides that looking at make files of other online open-source projects can really help in learning a lot about make.
 - How can you tell if the resource you are using is correct?
+  - Start by seeing the reliability of source (good sources usually have references to source materials). Also cross-referring what you're reading with official documentations can be really helpful and avoids misinformation. I also many times try clearing things up using AI tools if I have any doubts and it's mostly correct as it has been trained on a lot of text including official documentations.
 - Create a makefile such that when you run `make` with no arguments, it will:
   - Create `build/` directory if it does not exist
   - Create executables **client** and **server** in `build/`, if needed
   - How does make know when it needs to rebuild the executables?
+    - Make uses timestamps of files to know if something needs to be rebuilt or not. So if the target executable is dependent on some dependency file, it compares the last modified timestamps of both files and rebuild the target file if dependency file is newer. Otherwise it skips rebuilding which helps make build faster.
   - Change your Makefile such that `make clean` will remove `build/` and all
     its contents
 - What are the most important command line arguments to learn for make?
+  - make -j: Allow parallel build for faster builds
+  - make -n: shows what files make will execute but does not execute them, good for debugging make files
+  - make -b: Rebuild everything, regardless of timestamps
+  - make -c dir: to run make file in some other directory 
+  - make -d: prints verbose debugging info
 - What are the most important directives to learn about in Makefile?
+  - Automatic: 
+    - $@: The name of the target being generated
+    - $<: The first prerequisite (usually the source file)
+    - $^: All prerequisites (useful for linking multiple object files)
+  - Variable assignment: = (lazy assignment), := (immediate assignment), ?= (assign if defined)
+  - .PHONY - This declares non-file targets
 - What are the most important commands to implement in your Makefile?
+  - all - Builds the main project/program
+  - clean - Removes generated files like executables and object files
+  - test - Runs the project's test suite to verify correctness
+  - install - Copies the built program/files to system or user install locations
+  - format - Automatically formats source code using a formatter tool
 - Which ones are essential, which ones are nice to haves?
+  - essential: all, clean
+  - nice to have: test, format, install
 
 ## Learn Basics of Git
 
