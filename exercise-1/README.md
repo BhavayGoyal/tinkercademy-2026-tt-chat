@@ -1,7 +1,5 @@
 # Exercise 1
 
-**Solved**
-
 ## How to Approach This Exercise
 
 Before you scroll down to the questions, try this:
