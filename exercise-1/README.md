@@ -42,7 +42,7 @@ Before you scroll down to the questions, try this:
      you didn't even realise you should have learned. What were yours, and how
      could a better learning plan have surfaced them earlier?
 
-       - Wasted time in thinking about project, Even used AI to understand concepts and learn concepts, I don't really feel I've read even close to suffice (TODO), known-unknown(other kinds of builds that are useful)
+       <!-- - Wasted time in thinking about project, Even used AI to understand concepts and learn concepts, I don't really feel I've read even close to suffice (TODO), known-unknown(other kinds of builds that are useful) -->
 
 The point of this exercise isn't to get the questions "right" — it's to notice
 the gap between how you *think* you learn and how you actually do, so you can

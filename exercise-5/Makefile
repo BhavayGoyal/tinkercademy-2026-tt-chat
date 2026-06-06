@@ -21,7 +21,7 @@ SRC_DIR := src
 # Find all the C and C++ files we want to compile
 # Note the single quotes around the * expressions. The shell will incorrectly expand these otherwise, but we want to send the * directly to the find command.
 
-SRCS := $(shell find $(SRC_DIR) -type f -name '*.cc')
+SRCS := $(shell find $(SRC_DIR) -type f -name '*.cc' ! -name '*_old.cc')
 
 # Prepends BUILD_DIR and appends .o to every src file
 # As an example, ./your_dir/hello.cpp turns into ./build/./your_dir/hello.cpp.o

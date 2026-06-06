@@ -1,6 +1,4 @@
-#ifndef UTILS_H
-#define UTILS_H
-
+#pragma once
 #include <iostream>
 
 namespace tt::chat {
@@ -13,5 +11,3 @@ template <typename T, typename S> void check_error(T test, S error_message) {
 }
 
 } // namespace tt::chat
-
-#endif // UTILS_H

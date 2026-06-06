@@ -1,5 +1,4 @@
-#ifndef CHAT_SOCKETS_H
-#define CHAT_SOCKETS_H
+#pragma once
 
 #include <arpa/inet.h>
 #include <iostream>
@@ -16,5 +15,3 @@ int create_socket();
 sockaddr_in create_address(int port);
 
 } // namespace tt::chat::net
-
-#endif // CHAT_SOCKETS_H
