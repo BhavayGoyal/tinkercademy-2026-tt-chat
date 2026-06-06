@@ -7,7 +7,7 @@
 #include <sys/types.h>
 #include <unistd.h>
 
-void check_error(bool test, std::string error_message) {
+void check_error(bool test, const std::string &error_message) {
   if (test) {
     std::cerr << error_message << "\n";
     exit(EXIT_FAILURE);
@@ -26,7 +26,7 @@ void set_binary_address(sockaddr_in &address, const std::string &server_ip) {
 }
 
 sockaddr_in create_address(const std::string &server_ip, int port) {
-  sockaddr_in address;
+  sockaddr_in address{};
   address.sin_family = AF_INET;
   address.sin_port = htons(port);
 
@@ -45,7 +45,8 @@ void send_and_receive_message(int sock, const std::string &message) {
   char buffer[kBufferSize] = {0};
 
   // Send the message to the server
-  send(sock, message.c_str(), message.size(), 0);
+  ssize_t sent_size = send(sock, message.c_str(), message.size(), 0);
+  check_error(sent_size < 0, "Send error\n");
   std::cout << "Sent: " << message << "\n";
 
   // Receive response from the server
@@ -55,7 +56,7 @@ void send_and_receive_message(int sock, const std::string &message) {
   } else if (read_size == 0) {
     std::cout << "Server closed connection.\n";
   } else {
-    std::cerr << "Read error\n";
+    check_error(true, "Read error\n");
   }
 }
 
