@@ -53,16 +53,7 @@ void Server::HandleAccept(int client_sock) {
   if (read_size > 0) {
     buffer[read_size] = '\0';
     std::cout << "Received: " << buffer << "\n";
-
-    size_t total_sent = 0;
-    while (total_sent < static_cast<size_t>(read_size)) {
-      ssize_t sent = send(client_sock, buffer + total_sent, read_size - total_sent, 0);
-      if (sent < 0) {
-        std::cerr << "Failed to send echo data\n";
-        break;
-      }
-      total_sent += sent;
-    }
+    send_all(client_sock, buffer, read_size);  // ✅ Clean and simple
     std::cout << "Echo message sent\n";
   } else if (read_size == 0) {
     std::cout << "Client disconnected.\n";
@@ -71,6 +62,7 @@ void Server::HandleAccept(int client_sock) {
   }
   close(client_sock);
 }
+
 
 
 } // namespace tt::chat::net

@@ -20,7 +20,9 @@ int create_socket() {
 }
 
 void set_socket_options(int sock, int opt) {
-  auto err_code = setsockopt(sock, SOL_SOCKET, SO_REUSEADDR | SO_REUSEPORT, &opt, sizeof(opt));
+  auto err_code = setsockopt(sock, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt));
+  check_error(err_code < 0, "setsockopt() error");
+  err_code = setsockopt(sock, SOL_SOCKET, SO_REUSEPORT, &opt, sizeof(opt));
   check_error(err_code < 0, "setsockopt() error");
 }
 
